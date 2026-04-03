@@ -1,0 +1,256 @@
+meta:
+  engine: 4.1.0
+units:
+  visual_x: 17
+  visual_y: 16
+  u: U # Ensure we are using 19.05!  
+  stabilizer_width: 7
+  stabilizer_height: 14
+  stabilizer_offset: -1 # This means south stabs, use `orient` to rotate them for north facing scenarios
+  stabilizer_spacing_2u: u / 2 + stabilizer_width / 2 + ((23.8 / 2) - (14 / 2) - (stabilizer_width / 2))
+  stabilizer_spacing_625u: u * ((6.25 - 1) / 2)  
+points:
+  zones:
+    matrix:
+      anchor:
+        shift: [50, -125] # Fix KiCad placement
+      columns:
+        one:
+          key:
+            column_net: P1
+            column_mark: 1      
+          rows:
+            bottom:
+              skip: true
+        two:
+          key:
+            spread: 1U
+            column_net: P0
+            column_mark: 2
+          rows:
+            bottom:
+              skip: true
+        three:
+          key:
+            spread: 1U
+            column_net: P14
+            column_mark: 3          
+        four:
+          key:
+            spread: 1U
+            column_net: P20
+            column_mark: 4
+          rows:
+            top:
+              skip: true
+            mid:
+              skip: true
+            bottom:
+              skip: true      
+            num:
+              skip: true    
+      rows:    
+        bottom:
+          padding: 1U
+          row_net: P19          
+        mid:
+          padding: 1U
+          row_net: P18
+        top:
+          padding: 1U
+          row_net: P18
+        num:
+          padding: 1U
+          row_net: P21
+        function:
+          padding: 1U
+          row_net: P15
+    enterkey:
+      anchor:
+        ref: matrix_four_bottom
+        shift: [0, .5U]
+      rows:
+        main:          
+          tags: [2u_stabilizers_vert]                     
+    pluskey:
+      anchor:
+        ref: matrix_four_top
+        shift: [0, .5U]
+      columns:
+        main:
+      rows:
+        main:
+          tags: [2u_stabilizers_vert_east]     
+          padding: .1U
+    zerokey:
+      anchor:
+        ref: matrix_one_bottom
+        shift: [.5U, 0]
+      columns:
+        main:
+      rows:
+        main:
+          tags: [2u_stabilizers]     
+    spacebar:
+      anchor:
+        ref: matrix_one_top
+        shift: [-1U, 0]
+      rows:
+        main:
+          tags: [625u_stabilizers]
+
+  key:
+    bind: 2
+outlines:
+  _raw:
+    - what: rectangle
+      where: true
+      asym: left
+      size: [1U,1U]
+    - what: rectangle
+      where: true
+      size: [stabilizer_width, stabilizer_height]
+    - what: rectangle
+      where: matrix_two_top
+      size: [5U, 6U]
+      adjust:
+        shift: [0, 0]
+  panel:
+    - what: outline
+      name: _raw
+      expand: 1.6
+  
+  _switch_cutouts:
+    - what: rectangle
+      where: true
+      asym: left
+      size: 14
+      bound: false
+  _2u_stabilizer: # This creates the stabilizer, you just need to use its name in a `where` clause of another outline
+    - operation: stack
+      where: 2u_stabilizers # Set this tag on the keys you want
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [stabilizer_spacing_2u, stabilizer_offset]
+    - operation: stack
+      where: 2u_stabilizers
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [-stabilizer_spacing_2u, stabilizer_offset]
+  _2u_stabilizer_vert: # This creates the stabilizer, you just need to use its name in a `where` clause of another outline
+    - operation: stack
+      where: 2u_stabilizers_vert # Set this tag on the keys you want
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [stabilizer_offset, stabilizer_spacing_2u]
+        rotate: 90
+    - operation: stack
+      where: 2u_stabilizers_vert
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [stabilizer_offset,-stabilizer_spacing_2u]
+        rotate: 90
+  _2u_stabilizer_vert_east: # This creates the stabilizer, you just need to use its name in a `where` clause of another outline
+    - operation: stack
+      where: 2u_stabilizers_vert_east # Set this tag on the keys you want
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [1, stabilizer_spacing_2u]
+        rotate: 90
+    - operation: stack
+      where: 2u_stabilizers_vert_east
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [1,-stabilizer_spacing_2u]
+        rotate: 90  
+  _625u_stabilizer: # This creates the stabilizer, you just need to use its name in a `where` clause of another outline
+    - operation: stack
+      where: 625u_stabilizers # Set this tag on the keys you want
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [stabilizer_offset, stabilizer_spacing_625u]
+        rotate: 90
+    - operation: stack
+      where: 625u_stabilizers
+      what: rectangle
+      size: [stabilizer_width, stabilizer_height]
+      adjust:
+        shift: [stabilizer_offset, -stabilizer_spacing_625u ]
+        rotate: 90
+  switch_plate:
+    main:
+      what: outline
+      name: panel
+    keyholes:
+      what: outline
+      name: _switch_cutouts
+      operation: subtract
+    stabilizerholes:
+      what: outline
+      name: _2u_stabilizer
+      operation: subtract
+    vertstabilizerholes:
+      what: outline
+      name: _2u_stabilizer_vert
+      operation: subtract
+    vertstabilizerholeseast:
+      what: outline
+      name: _2u_stabilizer_vert_east
+      operation: subtract
+    625stabholes:
+      what: outline
+      name: _625u_stabilizer
+      operation: subtract
+  
+pcbs:
+  numpad:
+    template: kicad8
+    outlines:
+      main:
+        outline: panel
+    footprints:
+      choc:
+        what: ceoloide/switch_choc_v1_v2
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{column_net}}"
+          include_keycap: true
+         
+          choc_v1_support: false
+          choc_v2_support: true
+          solder: true
+          hotswap: false
+      diode:
+        what: ceoloide/diode_tht_sod123
+        where: true
+        adjust:
+          rotate: 0
+          shift: [ 0, -4.5 ]
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+      promicro:
+        what: ceoloide/mcu_nice_nano
+        where:
+          ref: matrix_three_function
+          shift: [0, -.5U]
+          rotate: 0
+        params:
+          reverse_mount: true    
+      jlcpcb_order_number_text:
+        what: ceoloide/utility_text
+        where: matrix_four_function
+        params:
+          text: goofygraber
+          reversible: true
+        adjust:
+          shift: [0,-u/2]
+
