@@ -4,11 +4,11 @@ units:
   visual_x: 17
   visual_y: 16
   u: U # Ensure we are using 19.05!  
-  stabilizer_width: 7
+  stabilizer_width: 5.85 #or 7, I don't know
   stabilizer_height: 14
   stabilizer_offset: -1 # This means south stabs, use `orient` to rotate them for north facing scenarios
-  stabilizer_spacing_2u: u / 2 + stabilizer_width / 2 + ((23.8 / 2) - (14 / 2) - (stabilizer_width / 2))
-  stabilizer_spacing_625u: u * ((6.25 - 1) / 2)  
+  stabilizer_spacing_2u: 12
+  stabilizer_spacing_625u: 50  
 points:
   zones:
     matrix:
@@ -223,7 +223,8 @@ pcbs:
           from: "{{colrow}}"
           to: "{{column_net}}"
           include_keycap: true
-         
+          #keycap_height: 19
+          #keycap_width: 19 
           choc_v1_support: false
           choc_v2_support: true
           solder: true
