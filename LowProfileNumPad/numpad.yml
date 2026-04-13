@@ -6,7 +6,7 @@ units:
   u: U # Ensure we are using 19.05!  
   stabilizer_width: 5.85 #5.85mm, confirmed with calipers
   stabilizer_height: 14 #14mm Chosfox low profile stab, confirmed with calipers
-  stabilizer_offset: -1 # This means south stabs, use `orient` to rotate them for north facing scenarios
+  stabilizer_offset: -3 #-1, not sure -1 is correct # This means south stabs, use `orient` to rotate them for north facing scenarios
   stabilizer_spacing_2u: 12
   stabilizer_spacing_625u: 50  
 points:
