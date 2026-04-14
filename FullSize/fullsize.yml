@@ -7,7 +7,7 @@ points:
   zones:
     matrix:
       anchor:
-        shift: [50, -100] # Fix KiCad placement
+        shift: [25, -200] # Fix KiCad placement
       columns:
         one:
           key:
@@ -76,6 +76,18 @@ points:
             spread:  1U
             column_net: P9
             column_mark: 12
+        thirteen:
+          key:
+            spread: 1U
+          rows:
+            num:
+              shift: [0, 0]
+        fourteen:
+          key:
+            spread: 1U
+          rows:
+            num:
+              skip: true
       rows:
         2uspacebar:
           padding: 1U
@@ -93,6 +105,126 @@ points:
         top:
           padding: 1U
           row_net: P21
+        num:
+          padding: 1U
+
+        function:
+          padding: 1.5U
+          shift: [0, .5U]
+    arrows:
+      anchor:
+        shift: [300, -200] # Fix KiCad placement
+      columns:
+        one:
+          key:
+            column_net: P1
+            column_mark: 1
+          rows:
+            home:
+              skip: true
+            bottom:
+              skip: true
+        two:
+          key:
+            spread: 1U
+            column_net: P0
+            column_mark: 2
+          rows:
+            home:
+              skip: true             
+
+        three:
+          key:
+            spread: 1U
+            column_net: P14
+            column_mark: 3   
+          rows:
+            home:
+              skip: true
+            bottom:
+              skip: true
+      rows:
+        emptyspace:
+          padding: 1U
+          row_net: P19
+          skip: true
+        modrow:
+          padding: 1U
+          row_net: P19
+        bottom:
+          padding: 1U
+          row_net: P18
+        home:
+          padding: 1U
+          row_net: P15
+        top:
+          padding: 1U
+          row_net: P21
+        num:
+          padding: 1U
+
+        function:
+          padding: 1.5U
+          shift: [0, .5U]
+    numpad:
+      anchor:
+        shift: [365, -200] # Fix KiCad placement
+      columns:
+        one:
+          key:
+            column_net: P1
+            column_mark: 1
+          rows:
+            home:
+              skip: true
+            bottom:
+              skip: true
+        two:
+          key:
+            spread: 1U
+            column_net: P0
+            column_mark: 2
+          rows:
+            home:
+              skip: true             
+
+        three:
+          key:
+            spread: 1U
+            column_net: P14
+            column_mark: 3   
+          rows:
+            home:
+              skip: true
+            bottom:
+              skip: true
+        four:
+          key:
+            spread: 1U
+          
+      rows:
+        emptyspace:
+          padding: 1U
+          row_net: P19
+          skip: true
+        modrow:
+          padding: 1U
+          row_net: P19
+        bottom:
+          padding: 1U
+          row_net: P18
+        home:
+          padding: 1U
+          row_net: P15
+        top:
+          padding: 1U
+          row_net: P21
+        num:
+          padding: 1U
+
+        function:
+          padding: 1.5U
+          shift: [0, .5U]
   key:
     bind: 2
 outlines:
