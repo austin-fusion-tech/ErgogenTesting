@@ -13,11 +13,23 @@ points:
           key:
             column_net: P1
             column_mark: 1
+          rows:
+            home:
+              #shift: [.5U, 0U]
+            top: 
+              #shift: [.5U, 0U]
         two:
           key:
             spread: 1U
             column_net: P0
             column_mark: 2
+          rows:
+            home:
+              skip: true
+            bottom:
+              skip: true
+            top:
+              skip: true
         three:
           key:
             spread: 1U
@@ -176,18 +188,14 @@ points:
             column_mark: 1
           rows:
             home:
-              skip: true
             bottom:
-              skip: true
         two:
           key:
             spread: 1U
             column_net: P0
             column_mark: 2
           rows:
-            home:
-              skip: true             
-
+            home:            
         three:
           key:
             spread: 1U
@@ -195,9 +203,7 @@ points:
             column_mark: 3   
           rows:
             home:
-              skip: true
             bottom:
-              skip: true
         four:
           key:
             spread: 1U
